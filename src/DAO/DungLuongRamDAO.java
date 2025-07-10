@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.ArrayList;
+import java.sql.Statement;
 
 public class DungLuongRamDAO implements DAOinterface<DungLuongRamDTO> {
 
@@ -22,19 +22,30 @@ public class DungLuongRamDAO implements DAOinterface<DungLuongRamDTO> {
     }
     @Override
     public int insert(DungLuongRamDTO t) {
-        int result = 0;
+        int generatedId = -1;
+        Connection con = null;
         try {
-            Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "INSERT INTO `dungluongram`(`madlram`, `kichthuocram`,`trangthai`) VALUES (?,?,1)";
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            pst.setInt(1, t.getMadlram());
-            pst.setInt(2, t.getDungluongram());
-            result = pst.executeUpdate();
-            JDBCUtil.closeConnection(con);
+            con = JDBCUtil.getConnection();
+            String sql = "INSERT INTO `dungluongram`(`kichthuocram`,`trangthai`) VALUES (?,1)";
+            PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pst.setInt(1, t.getDungluongram());
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                ResultSet rs = pst.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedId = rs.getInt(1);
+                    t.setMadlram(generatedId); // Gán lại id cho DTO
+                }
+            }
+            pst.close();
         } catch (SQLException ex) {
             Logger.getLogger(DungLuongRamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (con != null) {
+                try { JDBCUtil.closeConnection(con); } catch (Exception ex) { }
+            }
         }
-        return result;
+        return generatedId;
     }
 
     @Override

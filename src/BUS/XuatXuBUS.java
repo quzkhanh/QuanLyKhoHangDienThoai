@@ -76,16 +76,12 @@ public class XuatXuBUS {
     }
     
     public boolean checkDup(String name) {
-        boolean check = true;
-        int i = 0;
-        while (i <= this.listXuatXu.size() && check == true) {
-            if (this.listXuatXu.get(i).getTenxuatxu().toLowerCase().contains(name.toLowerCase())) {
-                check = false;
-            } else {
-                i++;
+        for (int i = 0; i < this.listXuatXu.size(); i++) {
+            if (this.listXuatXu.get(i).getTenxuatxu().equalsIgnoreCase(name)) {
+                return false;
             }
         }
-        return check;
+        return true;
     }
 
 }

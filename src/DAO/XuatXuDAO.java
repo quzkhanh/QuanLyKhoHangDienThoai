@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,20 +24,31 @@ public class XuatXuDAO implements DAOinterface<XuatXuDTO>{
         return new XuatXuDAO();
     }
     @Override
-    public int insert(XuatXuDTO t) {
-        int result = 0;
+    public int insert(XuatXuDTO xuatxu) {
+        int generatedId = -1;
+        Connection conn = null;
         try {
-            Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "INSERT INTO `xuatxu`(`maxuatxu`, `tenxuatxu`,`trangthai`) VALUES (?,?,1)";
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            pst.setInt(1, t.getMaxuatxu());
-            pst.setString(2, t.getTenxuatxu());
-            result = pst.executeUpdate();
-            JDBCUtil.closeConnection(con);
-        } catch (SQLException ex) {
-            Logger.getLogger(XuatXuDAO.class.getName()).log(Level.SEVERE, null, ex);
+            conn = JDBCUtil.getConnection();
+            String sql = "INSERT INTO xuatxu (tenxuatxu) VALUES (?)";
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, xuatxu.getTenxuatxu());
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows > 0) {
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedId = rs.getInt(1);
+                    xuatxu.setMaxuatxu(generatedId); // Gán lại id cho DTO
+                }
+            }
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try { JDBCUtil.closeConnection(conn); } catch (Exception ex) { }
+            }
         }
-        return result;
+        return generatedId;
     }
 
     @Override

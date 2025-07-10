@@ -49,6 +49,16 @@ public class DungLuongRamBUS {
         }
         return check;
     }
+    
+    public boolean add(int kichthuoc) {
+        DungLuongRamDTO dlram = new DungLuongRamDTO();
+        dlram.setDungluongram(kichthuoc);
+        boolean check = dlramDAO.insert(dlram) != 0;
+        if (check) {
+            this.listDLRam.add(dlram);
+        }
+        return check;
+    }
 
     public boolean delete(DungLuongRamDTO dlram, int index) {
         boolean check = dlramDAO.delete(Integer.toString(dlram.getMadlram())) != 0;
@@ -78,14 +88,12 @@ public class DungLuongRamBUS {
     }
     
     public boolean checkDup(int dl) {
-        boolean check = true;
-        int i = 0;
-        while(i <= this.listDLRam.size() && check == true) {
-            if(this.listDLRam.get(i).getDungluongram()==dl) {
-                check = false;
-            } else i++;
+        for (int i = 0; i < this.listDLRam.size(); i++) {
+            if (this.listDLRam.get(i).getDungluongram() == dl) {
+                return false;
+            }
         }
-        return check;
+        return true;
     }
     
     public int getKichThuocById(int madlram) {

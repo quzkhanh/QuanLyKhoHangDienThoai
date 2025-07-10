@@ -92,15 +92,11 @@ public class DungLuongRomBUS {
     }
 
     public boolean checkDup(int dl) {
-        boolean check = true;
-        int i = 0;
-        while (i <= this.listDLRom.size() && check == true) {
-            if (this.listDLRom.get(i).getDungluongrom()== dl) {
-                check = false;
-            } else {
-                i++;
+        for (int i = 0; i < this.listDLRom.size(); i++) {
+            if (this.listDLRom.get(i).getDungluongrom() == dl) {
+                return false;
             }
         }
-        return check;
+        return true;
     }
 }

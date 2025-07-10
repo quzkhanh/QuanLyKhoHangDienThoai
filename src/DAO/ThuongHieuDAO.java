@@ -1,4 +1,3 @@
-
 package DAO;
 
 import DTO.ThuocTinhSanPham.ThuongHieuDTO;
@@ -17,18 +16,30 @@ public class ThuongHieuDAO implements DAOinterface<ThuongHieuDTO>{
     }
     @Override
     public int insert(ThuongHieuDTO t) {
-        int result = 0 ;
+        int generatedId = -1;
+        Connection con = null;
         try {
-            Connection con = (Connection) JDBCUtil.getConnection();
+            con = JDBCUtil.getConnection();
             String sql = "INSERT INTO `thuonghieu`(`tenthuonghieu`) VALUES (?)";
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            PreparedStatement pst = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             pst.setString(1, t.getTenthuonghieu());
-            result = pst.executeUpdate();
-            JDBCUtil.closeConnection(con);
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                ResultSet rs = pst.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedId = rs.getInt(1);
+                    t.setMathuonghieu(generatedId); // Gán lại id cho DTO
+                }
+            }
+            pst.close();
         } catch (SQLException ex) {
             Logger.getLogger(ThuongHieuDTO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (con != null) {
+                try { JDBCUtil.closeConnection(con); } catch (Exception ex) { }
+            }
         }
-        return result;
+        return generatedId;
     }
 
     @Override

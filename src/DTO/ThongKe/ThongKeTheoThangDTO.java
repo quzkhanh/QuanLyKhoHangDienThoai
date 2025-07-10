@@ -59,12 +59,12 @@ public class ThongKeTheoThangDTO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + this.thang;
-        hash = 59 * hash + this.chiphi;
-        hash = 59 * hash + this.doanhthu;
-        hash = 59 * hash + this.loinhuan;
-        return hash;
+        int hash = 7; // Khởi tạo giá trị hash ban đầu với số nguyên tố 7
+        hash = 59 * hash + this.thang;     // Nhân với 59 (số nguyên tố) rồi cộng thuộc tính thang
+        hash = 59 * hash + this.chiphi;    // Tiếp tục nhân với 59 và cộng thuộc tính chiphi
+        hash = 59 * hash + this.doanhthu;  // Tương tự với doanhthu
+        hash = 59 * hash + this.loinhuan;  // Và cuối cùng là loinhuan
+        return hash; // Trả về giá trị hash cuối cùng
     }
 
     @Override

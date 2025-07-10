@@ -43,7 +43,8 @@ public class ThuongHieuBUS {
     }
 
     public Boolean add(String name) {
-        ThuongHieuDTO lh = new ThuongHieuDTO(lhDAO.getAutoIncrement(), name);
+        ThuongHieuDTO lh = new ThuongHieuDTO();
+        lh.setTenthuonghieu(name);
         boolean check = lhDAO.insert(lh) != 0;
         if (check) {
             this.listLH.add(lh);
@@ -92,15 +93,11 @@ public class ThuongHieuBUS {
     }
 
     public boolean checkDup(String name) {
-        boolean check = true;
-        int i = 0;
-        while (i <= this.listLH.size() && check == true) {
-            if (this.listLH.get(i).getTenthuonghieu().toLowerCase().contains(name.toLowerCase())) {
-                check = false;
-            } else {
-                i++;
+        for (int i = 0; i < this.listLH.size(); i++) {
+            if (this.listLH.get(i).getTenthuonghieu().equalsIgnoreCase(name)) {
+                return false;
             }
         }
-        return check;
+        return true;
     }
 }

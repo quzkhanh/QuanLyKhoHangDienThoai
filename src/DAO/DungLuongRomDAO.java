@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.ArrayList;
+import java.sql.Statement;
 
 /**
  *
@@ -27,19 +27,30 @@ public class DungLuongRomDAO implements DAOinterface<DungLuongRomDTO> {
 
     @Override
     public int insert(DungLuongRomDTO t) {
-        int result = 0;
+        int generatedId = -1;
+        Connection con = null;
         try {
-            Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "INSERT INTO `dungluongrom`(`madlrom`, `kichthuocrom`,`trangthai`) VALUES (?,?,1)";
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            pst.setInt(1, t.getMadungluongrom());
-            pst.setInt(2, t.getDungluongrom());
-            result = pst.executeUpdate();
-            JDBCUtil.closeConnection(con);
+            con = JDBCUtil.getConnection();
+            String sql = "INSERT INTO `dungluongrom`(`kichthuocrom`,`trangthai`) VALUES (?,1)";
+            PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pst.setInt(1, t.getDungluongrom());
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                ResultSet rs = pst.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedId = rs.getInt(1);
+                    t.setMadungluongrom(generatedId); // Gán lại id cho DTO
+                }
+            }
+            pst.close();
         } catch (SQLException ex) {
             Logger.getLogger(DungLuongRomDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (con != null) {
+                try { JDBCUtil.closeConnection(con); } catch (Exception ex) { }
+            }
         }
-        return result;
+        return generatedId;
     }
 
     @Override

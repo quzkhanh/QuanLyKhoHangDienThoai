@@ -62,21 +62,17 @@ public class ThongKeNhaCungCapDTO {
 
 
     
-
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         final ThongKeNhaCungCapDTO other = (ThongKeNhaCungCapDTO) obj;
-        return true;
+        return this.mancc == other.mancc &&
+            Objects.equals(this.tenncc, other.tenncc) &&
+            this.soluong == other.soluong &&
+            this.tongtien == other.tongtien;
     }
+
 
     @Override
     public String toString() {
