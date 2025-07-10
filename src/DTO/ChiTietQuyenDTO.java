@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class ChiTietQuyenDTO {
     private int manhomquyen;

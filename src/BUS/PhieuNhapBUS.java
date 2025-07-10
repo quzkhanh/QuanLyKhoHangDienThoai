@@ -13,10 +13,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
 public class PhieuNhapBUS {
 
     public final PhieuNhapDAO phieunhapDAO = new PhieuNhapDAO();

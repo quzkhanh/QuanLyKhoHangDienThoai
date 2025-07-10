@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class PhieuXuatDAO implements DAOinterface<PhieuXuatDTO> {
     
@@ -28,19 +28,26 @@ public class PhieuXuatDAO implements DAOinterface<PhieuXuatDTO> {
         int result = 0;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "INSERT INTO `phieuxuat`(`maphieuxuat`, `tongtien`, `nguoitaophieuxuat`, `makh`, `trangthai`) VALUES (?,?,?,?,?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, t.getMaphieu());
-            pst.setInt(2, (int) t.getTongTien());
-            pst.setInt(3, t.getManguoitao());
-            pst.setInt(4, t.getMakh());
-            pst.setInt(5, t.getTrangthai());
+            String sql = "INSERT INTO `phieuxuat`(`tongtien`, `nguoitaophieuxuat`, `makh`, `trangthai`) VALUES (?,?,?,?)";
+            PreparedStatement pst = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
+            pst.setLong(1, t.getTongTien());
+            pst.setInt(2, t.getManguoitao());
+            pst.setInt(3, t.getMakh());
+            pst.setInt(4, t.getTrangthai());
             result = pst.executeUpdate();
+            if (result > 0) {
+                try (ResultSet rs = pst.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        t.setMaphieu(rs.getInt(1)); // Gán lại id tự động sinh
+                        return rs.getInt(1); // Trả về id tự động sinh
+                    }
+                }
+            }
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(PhieuXuatDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return result;
+        return 0;
     }
 
     @Override

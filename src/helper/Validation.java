@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class Validation {
 

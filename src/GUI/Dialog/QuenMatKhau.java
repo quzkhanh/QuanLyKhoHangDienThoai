@@ -29,7 +29,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class QuenMatKhau extends JDialog implements ActionListener {
 

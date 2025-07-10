@@ -8,10 +8,7 @@ import DAO.MauSacDAO;
 import DTO.ThuocTinhSanPham.MauSacDTO;
 import java.util.ArrayList;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class MauSacBUS {
 
     private MauSacDAO mausacDAO = new MauSacDAO();

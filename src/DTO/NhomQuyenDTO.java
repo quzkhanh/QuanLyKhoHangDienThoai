@@ -6,10 +6,7 @@ package DTO;
 
 import java.util.Objects;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class NhomQuyenDTO {
     private int manhomquyen;
     private String tennhomquyen;

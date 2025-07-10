@@ -36,7 +36,7 @@ import javax.swing.text.PlainDocument;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public final class ThongKeDoanhThuTungNam extends JPanel implements ActionListener {
 

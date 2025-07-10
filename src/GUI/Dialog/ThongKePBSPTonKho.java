@@ -20,7 +20,7 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public final class ThongKePBSPTonKho extends JDialog{
 

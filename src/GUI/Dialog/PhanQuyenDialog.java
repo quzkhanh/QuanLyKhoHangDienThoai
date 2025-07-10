@@ -34,7 +34,7 @@ import javax.swing.border.EmptyBorder;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public final class PhanQuyenDialog extends JDialog implements ActionListener {
 

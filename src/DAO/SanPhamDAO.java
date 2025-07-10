@@ -3,6 +3,7 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement; // Thêm dòng này để sử dụng Statement.RETURN_GENERATED_KEYS
 import config.JDBCUtil;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,31 +19,39 @@ public class SanPhamDAO implements DAOinterface<SanPhamDTO> {
 
     @Override
     public int insert(SanPhamDTO t) {
-        int result = 0;
-        try {
-            Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "INSERT INTO `sanpham`(`masp`, `tensp`, `hinhanh`, `xuatxu`, `chipxuly`, `dungluongpin`, `kichthuocman`, `hedieuhanh`, `phienbanhdh`, `camerasau`, `cameratruoc`, `thoigianbaohanh`, `thuonghieu`, `khuvuckho`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            pst.setInt(1, t.getMasp());
-            pst.setString(2, t.getTensp());
-            pst.setString(3, t.getHinhanh());
-            pst.setInt(4, t.getXuatxu());
-            pst.setString(5, t.getChipxuly());
-            pst.setInt(6, t.getDungluongpin());
-            pst.setDouble(7, t.getKichthuocman());
-            pst.setInt(8, t.getHedieuhanh());
-            pst.setInt(9, t.getPhienbanhdh());
-            pst.setString(10, t.getCamerasau());
-            pst.setString(11, t.getCameratruoc());
-            pst.setInt(12, t.getThoigianbaohanh());
-            pst.setInt(13, t.getThuonghieu());
-            pst.setInt(14, t.getKhuvuckho());
-            result = pst.executeUpdate();
-            JDBCUtil.closeConnection(con);
+        try (Connection con = JDBCUtil.getConnection();
+            PreparedStatement pst = con.prepareStatement(
+                "INSERT INTO `sanpham`(`tensp`, `hinhanh`, `xuatxu`, `chipxuly`, `dungluongpin`, `kichthuocman`, `hedieuhanh`, `phienbanhdh`, `camerasau`, `cameratruoc`, `thoigianbaohanh`, `thuonghieu`, `khuvuckho`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                Statement.RETURN_GENERATED_KEYS)) {
+            
+            pst.setString(1, t.getTensp());
+            pst.setString(2, t.getHinhanh());
+            pst.setInt(3, t.getXuatxu());
+            pst.setString(4, t.getChipxuly());
+            pst.setInt(5, t.getDungluongpin());
+            pst.setDouble(6, t.getKichthuocman());
+            pst.setInt(7, t.getHedieuhanh());
+            pst.setInt(8, t.getPhienbanhdh());
+            pst.setString(9, t.getCamerasau());
+            pst.setString(10, t.getCameratruoc());
+            pst.setInt(11, t.getThoigianbaohanh());
+            pst.setInt(12, t.getThuonghieu());
+            pst.setInt(13, t.getKhuvuckho());
+            
+            int result = pst.executeUpdate();
+            if (result > 0) {
+                try (ResultSet rs = pst.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        t.setMasp(rs.getInt(1)); // Update DTO with generated masp
+                        return rs.getInt(1); // Return generated masp
+                    }
+                }
+            }
+            return 0; // No rows affected
         } catch (SQLException ex) {
             Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return 0; // Trả về 0 nếu có lỗi
         }
-        return result;
     }
 
     @Override

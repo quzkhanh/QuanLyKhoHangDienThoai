@@ -8,10 +8,6 @@ import DAO.DungLuongRomDAO;
 import DTO.ThuocTinhSanPham.DungLuongRomDTO;
 import java.util.ArrayList;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
 public class DungLuongRomBUS {
 
     private final DungLuongRomDAO dlromDAO = new DungLuongRomDAO();

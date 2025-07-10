@@ -28,7 +28,7 @@ import javax.swing.text.PlainDocument;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class NhaCungCapDialog extends JDialog implements ActionListener {
 

@@ -8,7 +8,7 @@ import javax.swing.JTabbedPane;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class ThongKeDoanhThu extends JPanel {
 

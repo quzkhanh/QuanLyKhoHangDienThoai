@@ -8,6 +8,7 @@ import DTO.NhanVienDTO;
 import DTO.NhomQuyenDTO;
 import DTO.TaiKhoanDTO;
 import GUI.Log_In;
+import GUI.Login;
 import GUI.Main;
 import GUI.Panel.ChuyenKho;
 import GUI.Panel.KhachHang;
@@ -112,8 +113,6 @@ public class MenuTaskbar extends JPanel {
         info.setOpaque(false);
         info.setLayout(new BorderLayout(0, 0));
         pnlTop.add(info, BorderLayout.CENTER);
-
-        // Cái info này bỏ vô cho đẹp tí, mai mốt có gì xóa đi đê hiển thị thông tin tài khoản và quyền
         in4(info);
 
         bar1 = new JPanel();
@@ -287,7 +286,7 @@ public class MenuTaskbar extends JPanel {
                         "Bạn có chắc chắn muốn đăng xuất?", "Đăng xuất",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if (input == 0) {
-                    Log_In login = new Log_In();
+                    Login login = new Login();
                     main.dispose();
                     login.setVisible(true);
                 }
@@ -346,7 +345,7 @@ public class MenuTaskbar extends JPanel {
         info.add(pnlInfo, BorderLayout.CENTER);
 
         lblUsername = new JLabel(nhanVienDTO.getHoten());
-        lblUsername.putClientProperty("FlatLaf.style", "font: 150% $semibold.font");
+        lblUsername.putClientProperty("FlatLaf.style", "font: 130% $semibold.font");
         pnlInfo.add(lblUsername);
 
         lblTenNhomQuyen = new JLabel(nhomQuyenDTO.getTennhomquyen());

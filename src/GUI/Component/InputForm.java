@@ -18,7 +18,7 @@ import javax.swing.plaf.ComponentUI;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public final class InputForm extends JPanel {
 

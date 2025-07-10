@@ -8,10 +8,7 @@ import DAO.NhaCungCapDAO;
 import DTO.NhaCungCapDTO;
 import java.util.ArrayList;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class NhaCungCapBUS {
 
     private final NhaCungCapDAO NccDAO = new NhaCungCapDAO();

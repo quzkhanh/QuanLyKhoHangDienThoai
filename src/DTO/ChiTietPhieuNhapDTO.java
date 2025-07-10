@@ -10,7 +10,7 @@ import DTO.ChiTietPhieuDTO;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class ChiTietPhieuNhapDTO extends ChiTietPhieuDTO{
     private int phuongthucnnhap;

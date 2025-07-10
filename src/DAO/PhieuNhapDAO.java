@@ -14,10 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
 
     public static PhieuNhapDAO getInstance() {
@@ -30,19 +27,26 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
         int result = 0;
         try {
             Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "INSERT INTO `phieunhap`(`maphieunhap`, `thoigian`, `manhacungcap`, `nguoitao`, `tongtien`) VALUES (?,?,?,?,?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setInt(1, t.getMaphieu());
-            pst.setTimestamp(2, t.getThoigiantao());
-            pst.setInt(3, t.getManhacungcap());
-            pst.setInt(4, t.getManguoitao());
-            pst.setDouble(5, t.getTongTien());
+            String sql = "INSERT INTO `phieunhap`(`thoigian`, `manhacungcap`, `nguoitao`, `tongtien`) VALUES (?,?,?,?)";
+            PreparedStatement pst = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
+            pst.setTimestamp(1, t.getThoigiantao());
+            pst.setInt(2, t.getManhacungcap());
+            pst.setInt(3, t.getManguoitao());
+            pst.setDouble(4, t.getTongTien());
             result = pst.executeUpdate();
+            if (result > 0) {
+                try (ResultSet rs = pst.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        t.setMaphieu(rs.getInt(1)); // Gán lại id tự động sinh
+                        return rs.getInt(1); // Trả về id tự động sinh
+                    }
+                }
+            }
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
             Logger.getLogger(PhieuNhapDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return result;
+        return 0;
     }
 
     @Override

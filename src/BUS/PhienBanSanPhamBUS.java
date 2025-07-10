@@ -5,10 +5,7 @@ import DTO.ChiTietSanPhamDTO;
 import DTO.PhienBanSanPhamDTO;
 import java.util.ArrayList;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class PhienBanSanPhamBUS {
     private PhienBanSanPhamDAO cauhinhDAO = new PhienBanSanPhamDAO();
     

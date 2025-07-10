@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class PhieuNhapDTO extends PhieuDTO{
     private int manhacungcap;

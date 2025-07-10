@@ -12,10 +12,6 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
 public class ChiTietSanPhamDAO implements DAOinterface<ChiTietSanPhamDTO> {
     
     public static ChiTietSanPhamDAO getInstance(){

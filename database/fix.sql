@@ -1,0 +1,5 @@
+ALTER TABLE `sanpham`
+MODIFY `masp` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `phieunhap`
+MODIFY `maphieunhap` int(11) NOT NULL AUTO_INCREMENT;

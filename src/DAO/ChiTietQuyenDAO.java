@@ -11,10 +11,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class ChiTietQuyenDAO implements ChiTietInterface<ChiTietQuyenDTO> {
 
     public static ChiTietQuyenDAO getInstance() {

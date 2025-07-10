@@ -8,10 +8,7 @@ import DAO.DungLuongRamDAO;
 import DTO.ThuocTinhSanPham.DungLuongRamDTO;
 import java.util.ArrayList;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class DungLuongRamBUS {
     private final DungLuongRamDAO dlramDAO = new DungLuongRamDAO();
     private ArrayList<DungLuongRamDTO> listDLRam = new ArrayList<>();

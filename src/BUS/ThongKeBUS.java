@@ -11,10 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class ThongKeBUS {
 
     ThongKeDAO thongkeDAO = new ThongKeDAO();

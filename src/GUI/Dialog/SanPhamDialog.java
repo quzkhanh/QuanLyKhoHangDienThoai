@@ -53,7 +53,7 @@ import javax.swing.text.PlainDocument;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public final class SanPhamDialog extends JDialog implements ActionListener {
 

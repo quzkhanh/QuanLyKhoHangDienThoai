@@ -11,10 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class NhomQuyenDAO implements DAOinterface<NhomQuyenDTO> {
 
     public static NhomQuyenDAO getInstance() {

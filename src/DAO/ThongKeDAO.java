@@ -24,10 +24,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Tran Nhat Sinh
- */
+
 public class ThongKeDAO {
 
     public static ThongKeDAO getInstance() {

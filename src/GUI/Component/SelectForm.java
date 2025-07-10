@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class SelectForm extends JPanel{
     private JLabel lblTitle;

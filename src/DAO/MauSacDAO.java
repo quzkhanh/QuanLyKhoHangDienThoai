@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class MauSacDAO implements DAOinterface<MauSacDTO> {
 

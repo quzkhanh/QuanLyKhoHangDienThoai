@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class ChonSanPhamNhap extends JDialog{
     

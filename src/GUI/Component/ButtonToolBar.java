@@ -12,7 +12,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class ButtonToolBar extends JButton{
     String permisson;

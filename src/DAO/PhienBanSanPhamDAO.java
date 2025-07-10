@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class PhienBanSanPhamDAO implements ChiTietInterface<PhienBanSanPhamDTO> {
 

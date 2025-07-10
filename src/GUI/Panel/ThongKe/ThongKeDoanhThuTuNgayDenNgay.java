@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public final class ThongKeDoanhThuTuNgayDenNgay extends JPanel {
 

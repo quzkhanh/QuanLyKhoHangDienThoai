@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 /**
  *
- * @author Tran Nhat Sinh
+ * @author Nguyen Quoc Khanh
  */
 public class Formater {
 
